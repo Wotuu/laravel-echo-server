@@ -1,5 +1,6 @@
-import { Database } from './../database';
-import { Log } from './../log';
+import {Database} from './../database';
+import {Log} from './../log';
+
 var _ = require("lodash");
 
 export class PresenceChannel {
@@ -123,7 +124,7 @@ export class PresenceChannel {
                 let member
 
                 members = members.filter((m) => {
-                    if(m.socketId == socket.id) {
+                    if (m.socketId == socket.id) {
                         member = m
                         return false
                     }
@@ -133,7 +134,7 @@ export class PresenceChannel {
 
                 this.db.set(channel + ":members", members);
 
-                if(member) {
+                if (member) {
                     this.isMember(channel, member).then((is_member) => {
                         if (!is_member) {
                             delete member.socketId;
@@ -150,9 +151,11 @@ export class PresenceChannel {
      * On join event handler.
      */
     onJoin(socket: any, channel: string, member: any): void {
-        this.io.sockets.connected[socket.id].broadcast
-            .to(channel)
-            .emit("presence:joining", channel, member);
+        if (this.io.sockets.connected[socket.id]) {
+            this.io.sockets.connected[socket.id].broadcast
+                .to(channel)
+                .emit("presence:joining", channel, member);
+        }
     }
 
     /**
