@@ -5,19 +5,30 @@
     "moduleResolution": "node",
     "noImplicitAny": false,
     "outDir": "./dist",
+    "rootDir": "./src",
     "pretty": true,
     "preserveConstEnums": true,
     "removeComments": true,
-    "target": "es5",
-    "lib": ["es2015", "dom"],
-    "types": ["node"]
+    "target": "es2019",
+    "lib": [
+      "es2019",
+      "dom"
+    ],
+    "types": [
+      "node"
+    ],
+    "skipLibCheck": true
   },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
   "files": [
     "src/index.ts",
     "src/cli/index.ts"
-  ],
-  "exclude": [
-    "node_modules"
   ],
   "compileOnSave": false,
   "buildOnSave": false,
