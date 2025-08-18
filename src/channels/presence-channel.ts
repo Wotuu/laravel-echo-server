@@ -113,10 +113,14 @@ export class PresenceChannel {
     }
 
     /**
-     * Remove a member from a presenece channel and broadcast they have left
+     * Remove a member from a presence channel and broadcast they have left
      * only if not other presence channel instances exist.
      */
     leave(socket: any, channel: string): void {
+        if(!socket){
+            return;
+        }
+
         this.getMembers(channel).then(
             (members) => {
                 members = members || [];
